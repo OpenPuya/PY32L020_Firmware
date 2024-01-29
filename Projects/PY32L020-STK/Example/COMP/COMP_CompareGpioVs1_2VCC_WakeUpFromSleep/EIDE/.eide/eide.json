@@ -1,0 +1,152 @@
+{
+  "name": "Project",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [
+    ".eide/deps"
+  ],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "BSP",
+        "files": [
+          {
+            "path": "../../../../../../Drivers/BSP/PY32L020xx_Start_Kit/py32l020xx_Start_Kit.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Common",
+        "files": [
+          {
+            "path": "../Src/system_py32l020.c"
+          },
+          {
+            "path": "startup_py32l020xx.s"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Doc",
+        "files": [
+          {
+            "path": "../readme.txt"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "PY32L020_HAL_Driver",
+        "files":[
+          {
+            "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_rcc.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_rcc_ex.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_gpio.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_pwr.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_uart.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_cortex.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_comp.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "User",
+        "files":[
+          {
+            "path":"../Src/main.c"
+          },
+          {
+            "path":"../Src/py32l020_hal_msp.c"
+          },
+          {
+            "path":"../Src/py32l020_it.c"
+          }
+        ],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": "PY32L020x5",
+  "packDir": "../../../../../../Packs/GCC/.pack/Puya/PY32L0xx_DFP",
+  "miscInfo": {
+    "uid": "36bcf0031e18a3008bbdaa90a96a7987"
+  },
+  "targets": {
+    "Project": {
+      "excludeList": [],
+      "toolchain": "GCC",
+      "compileConfig": {
+        "cpuType": "Cortex-M0+",
+        "floatingPointHardware": "none",
+        "scatterFilePath": "py32l020x5.ld",
+        "useCustomScatterFile": true,
+        "storageLayout": {
+          "RAM": [],
+          "ROM": []
+        },
+        "options": "null"
+      },
+      "uploader": "OpenOCD",
+      "uploadConfig": {
+        "bin": "",
+        "target": "py32l020",
+        "interface": "cmsis-dap",
+        "baseAddr": "0x08000000"
+      },
+      "uploadConfigMap": {
+        "JLink": {
+          "bin": "",
+          "baseAddr": "",
+          "cpuInfo": {
+            "vendor": "Puya",
+            "cpuName": "PY32L020x5"
+          },
+          "proType": 1,
+          "speed": 1000,
+          "otherCmds": ""
+        },
+        "OpenOCD": {
+          "bin": "",
+          "target": "py32l020",
+          "interface": "cmsis-dap",
+          "baseAddr": "0x08000000"
+        }
+      },
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          "../Inc",
+          "../../../../../../Drivers/BSP/PY32L020xx_Start_Kit",
+          "../../../../../../Drivers/CMSIS/Include",
+          "../../../../../../Drivers/CMSIS/Device/PY32L0xx/Include",
+          "../../../../../../Drivers/PY32L020_HAL_Driver/Inc"
+        ],
+        "libList": [],
+        "sourceDirList": [],
+        "defineList": ["USE_HAL_DRIVER","PY32L020x5"]
+      }
+    }
+  },
+  "version": "3.3"
+}
