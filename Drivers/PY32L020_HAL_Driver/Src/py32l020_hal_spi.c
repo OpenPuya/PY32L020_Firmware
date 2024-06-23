@@ -737,6 +737,9 @@ HAL_StatusTypeDef HAL_SPI_Transmit(SPI_HandleTypeDef *hspi, uint8_t *pData, uint
     goto error;
   }
 
+  /* Disable SPI peripheral */
+  __HAL_SPI_DISABLE(hspi);
+
   /* Set the transaction information */
   hspi->State       = HAL_SPI_STATE_BUSY_TX;
   hspi->ErrorCode   = HAL_SPI_ERROR_NONE;
@@ -889,6 +892,9 @@ HAL_StatusTypeDef HAL_SPI_Receive(SPI_HandleTypeDef *hspi, uint8_t *pData, uint1
     goto error;
   }
 
+  /* Disable SPI peripheral */
+  __HAL_SPI_DISABLE(hspi);
+
   /* Set the transaction information */
   hspi->State       = HAL_SPI_STATE_BUSY_RX;
   hspi->ErrorCode   = HAL_SPI_ERROR_NONE;
@@ -1039,6 +1045,9 @@ HAL_StatusTypeDef HAL_SPI_TransmitReceive(SPI_HandleTypeDef *hspi, uint8_t *pTxD
     hspi->State = HAL_SPI_STATE_BUSY_TX_RX;
   }
 
+  /* Disable SPI peripheral */
+  __HAL_SPI_DISABLE(hspi);
+
   /* Set the transaction information */
   hspi->ErrorCode   = HAL_SPI_ERROR_NONE;
   hspi->pRxBuffPtr  = (uint8_t *)pRxData;
@@ -1177,6 +1186,9 @@ HAL_StatusTypeDef HAL_SPI_Transmit_IT(SPI_HandleTypeDef *hspi, uint8_t *pData, u
     goto error;
   }
 
+  /* Disable SPI peripheral */
+  __HAL_SPI_DISABLE(hspi);
+
   /* Set the transaction information */
   hspi->State       = HAL_SPI_STATE_BUSY_TX;
   hspi->ErrorCode   = HAL_SPI_ERROR_NONE;
@@ -1257,6 +1269,9 @@ HAL_StatusTypeDef HAL_SPI_Receive_IT(SPI_HandleTypeDef *hspi, uint8_t *pData, ui
     errorcode = HAL_ERROR;
     goto error;
   }
+
+  /* Disable SPI peripheral */
+  __HAL_SPI_DISABLE(hspi);
 
   /* Set the transaction information */
   hspi->State       = HAL_SPI_STATE_BUSY_RX;
@@ -1352,6 +1367,9 @@ HAL_StatusTypeDef HAL_SPI_TransmitReceive_IT(SPI_HandleTypeDef *hspi, uint8_t *p
   {
     hspi->State = HAL_SPI_STATE_BUSY_TX_RX;
   }
+
+  /* Disable SPI peripheral */
+  __HAL_SPI_DISABLE(hspi);
 
   /* Set the transaction information */
   hspi->ErrorCode   = HAL_SPI_ERROR_NONE;

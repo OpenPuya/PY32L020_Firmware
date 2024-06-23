@@ -52,7 +52,7 @@
             "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_rcc_ex.c"
           },
           {                
-            "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_cortex.c"
+            "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_uart.c"
           },
           {                
             "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_gpio.c"
@@ -61,7 +61,7 @@
             "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_pwr.c"
           },
           {                
-            "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_uart.c"
+            "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_cortex.c"
           },
           {                
             "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_flash.c"
@@ -76,10 +76,10 @@
             "path":"../Src/main.c"
           },
           {
-            "path":"../Src/py32l020_it.c"
+            "path":"../Src/py32l020_hal_msp.c"
           },
           {
-            "path":"../Src/py32l020_hal_msp.c"
+            "path":"../Src/py32l020_it.c"
           }
         ],
         "folders": []

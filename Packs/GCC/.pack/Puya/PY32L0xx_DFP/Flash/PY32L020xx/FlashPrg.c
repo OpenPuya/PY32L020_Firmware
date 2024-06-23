@@ -21,7 +21,7 @@
  * $Date:        2021-7-1
  * $Revision:    V1.0.0
  *
- * Project:      Flash Programming Functions for Puya PY32F002Bxx Flash
+ * Project:      Flash Programming Functions for Puya PY32L020xx Flash
  * --------------------------------------------------------------------------- */
 
 /* History:

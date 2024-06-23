@@ -83,6 +83,7 @@
 #define CLOCKSWITCH_TIMEOUT_VALUE  (5000U) /* 5 s    */
 #define HSI_TIMEOUT_VALUE          (2U)    /* 2 ms (minimum Tick + 1) */
 #define LSI_TIMEOUT_VALUE          (2U)    /* 2 ms (minimum Tick + 1) */
+#define AHB_24MHZ                  (24000000U)
 /**
   * @}
   */
@@ -318,6 +319,12 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
       /* Otherwise, just the calibration is allowed */
       else
       {
+        /* Program the new number of wait states to the LATENCY bits in the FLASH_ACR register */
+        __HAL_FLASH_SET_LATENCY(FLASH_LATENCY_1);
+        
+        /* Adjust the HSI division factor */
+        __HAL_RCC_HSI_CONFIG(RCC_OscInitStruct->HSIDiv);
+        
         /* Adjusts the Internal High Speed oscillator (HSI) calibration value.*/
         __HAL_RCC_HSI_CALIBRATIONVALUE_ADJUST(RCC_OscInitStruct->HSICalibrationValue);
 
@@ -333,14 +340,14 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
           }
         }
 
-        if (temp_sysclksrc == RCC_CFGR_SWS_HSISYS)
+        /* Update the SystemCoreClock global variable with HSISYS value  */
+        SystemCoreClock = (HAL_RCC_GetSysClockFreq() >> ((AHBPrescTable[(RCC->CFGR & RCC_CFGR_HPRE) >> RCC_CFGR_HPRE_Pos]) & 0x1FU));
+        
+        if(SystemCoreClock <= AHB_24MHZ)
         {
-          /* Adjust the HSI division factor */
-          __HAL_RCC_HSI_CONFIG(RCC_OscInitStruct->HSIDiv);
-
-          /* Update the SystemCoreClock global variable with HSISYS value  */
-          SystemCoreClock = (HAL_RCC_GetSysClockFreq() >> ((AHBPrescTable[(RCC->CFGR & RCC_CFGR_HPRE) >> RCC_CFGR_HPRE_Pos]) & 0x1FU));
-        }
+          /* Program the new number of wait states to the LATENCY bits in the FLASH_ACR register */
+          __HAL_FLASH_SET_LATENCY(FLASH_LATENCY_0);
+        }    
 
         /* Adapt Systick interrupt period */
         if (HAL_InitTick(uwTickPrio) != HAL_OK)

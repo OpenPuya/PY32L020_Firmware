@@ -89,7 +89,7 @@ typedef enum
 #define LED3_GPIO_CLK_DISABLE()            LL_IOP_GRP1_DisableClock(LL_IOP_GRP1_PERIPH_GPIOA)
 
 #define LEDx_GPIO_CLK_ENABLE(__INDEX__)    do {LED3_GPIO_CLK_ENABLE(); } while(0U)
-#define LEDx_GPIO_CLK_DISABLE(__INDEX__)   LED3_GPIO_CLK_DISABLE())
+#define LEDx_GPIO_CLK_DISABLE(__INDEX__)   LED3_GPIO_CLK_DISABLE()
 
 #define BUTTONn                            1
 
@@ -117,7 +117,7 @@ typedef enum
 #define BUTTONx_GPIO_CLK_DISABLE(__INDEX__)     (((__INDEX__) == 0) ? USER_BUTTON_GPIO_CLK_DISABLE() : 0)
 
 
-//debug printf redirect config
+/* debug printf redirect config */
 #define DEBUG_USART_BAUDRATE                    115200
 
 #define DEBUG_USART                             USART1

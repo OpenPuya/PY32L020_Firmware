@@ -78,7 +78,7 @@ communication fails.
 注意事项:
 1.必须先按从机复位按键使从机程序先运行，再按主机用户按键开始运行主机程序，否则会
 导致主从机通信失败。
-2.主机模式可通过程序设置IO控制方式为DMA方式、中断方式和查询方式
+2.主机模式可通过程序设置IO控制方式为中断方式和查询方式
 3.NSS引脚只需要在使用NSS硬件方式时连接（本样例使用的是NSS软件方式，无需连接NSS引
 脚）
 4.板子上的LED灯引脚为PA1，与SPI_MISO引脚为同一个，不能再用LED表示通讯成功或失败
@@ -88,8 +88,8 @@ Notes:
 1. You must first press the slave reset button to make the slave program run 
 first,and then press the host user button to start running the host program, 
 otherwise it will cause the master-slave communication failure.
-2. The IO control mode can be set to DMA mode, interrupt mode and polling mode 
-by the program in the master mode.
+2. The IO control mode can be set to interrupt mode and polling mode by the 
+program in the master mode.
 3. NSS pins only need to be connected when using the NSS hardware mode (this 
 sample uses the NSS software mode, no need to connect the NSS pins)
 4. The LED pin on the board is PA1, which is the same as the SPI_MISO pin, and 

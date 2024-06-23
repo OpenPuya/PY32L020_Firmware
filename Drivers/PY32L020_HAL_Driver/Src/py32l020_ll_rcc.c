@@ -228,7 +228,7 @@ uint32_t LL_RCC_GetMCOClockFreq(uint32_t MCOx)
   return mco_frequency;
 }
 
-#if defined(RCC_BDCR_LSCOEN)
+#if defined(RCC_BDCR_LSCOSEL)
 /**
   * @brief  Return LSC clock frequency
   * @retval LSC clock frequency (in Hz)
@@ -390,9 +390,11 @@ uint32_t RCC_GetSystemClockFreq(void)
     break;
   case LL_RCC_SYS_CLKSOURCE_STATUS_LSI:
     frequency = LL_RCC_LSI_GetFreq();
+    break;
 #if defined(RCC_LSE_SUPPORT)
   case LL_RCC_SYS_CLKSOURCE_STATUS_LSE:
     frequency = LSE_VALUE;
+    break;
 #endif
   case LL_RCC_SYS_CLKSOURCE_STATUS_HSISYS:  /* HSISYS used as system clock  source */
   default:

@@ -733,10 +733,8 @@ typedef enum
   * @param __HANDLE__ ADC handle
   * @retval SET (ADC enabled) or RESET (ADC disabled)
   */
-/* Note: If low power mode AutoPowerOff is enabled, power-on/off phases are   */
-/*       performed automatically by hardware and flag ADC_FLAG_RDY is not     */
-/*       set.                                                                 */
-#define ADC_IS_ENABLE(__HANDLE__) ((( ((((hadc)->Instance->CR) & (ADC_CR_ADEN)) == ADC_CR_ADEN) )  )  ? SET : RESET)
+
+#define ADC_IS_ENABLE(__HANDLE__) ((( ((((__HANDLE__)->Instance->CR) & (ADC_CR_ADEN)) == ADC_CR_ADEN) )  )  ? SET : RESET)
 
 /**
   * @brief Test if conversion trigger of regular group is software start

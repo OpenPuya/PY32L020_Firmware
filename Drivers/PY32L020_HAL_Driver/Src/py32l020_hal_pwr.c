@@ -191,7 +191,7 @@ void HAL_PWR_DeInit(void)
 
 /**
   * @brief  Configure LPR voltage,sram retention voltage,and wakeup correlation
-            timing in Sto mode.
+            timing in Stop mode.
   * @param  sStopModeConfig pointer to a PWR_StopModeConfigTypeDef structure that
             contains the Stop mode configuration information.
   * @retval HAL_OK

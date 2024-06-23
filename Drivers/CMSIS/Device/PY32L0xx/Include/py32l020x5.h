@@ -9,16 +9,8 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
+  * <h2><center>&copy; Copyright (c) Puya Semiconductor Co.
   * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by Puya under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  * @attention
   *
   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.</center></h2>
@@ -785,10 +777,10 @@ typedef struct
 /******************************************************************************/
 /********************  Bit definition for DBG_IDCODE register  *************/
 #define DBGMCU_IDCODE_DEV_ID_Pos                          (0U)
-#define DBGMCU_IDCODE_DEV_ID_Msk                          (0x1UL << DBGMCU_IDCODE_DEV_ID_Pos)     /*!< 0x00000001 */
+#define DBGMCU_IDCODE_DEV_ID_Msk                          (0x3UL << DBGMCU_IDCODE_DEV_ID_Pos)     /*!< 0x00000003 */
 #define DBGMCU_IDCODE_DEV_ID                              DBGMCU_IDCODE_DEV_ID_Msk
 #define DBGMCU_IDCODE_REV_ID_Pos                          (16U)
-#define DBGMCU_IDCODE_REV_ID_Msk                          (0xFFFFUL << DBGMCU_IDCODE_REV_ID_Pos)  /*!< 0xFFFFFFFF */
+#define DBGMCU_IDCODE_REV_ID_Msk                          (0xFFFFUL << DBGMCU_IDCODE_REV_ID_Pos)  /*!< 0xFFFF0000 */
 #define DBGMCU_IDCODE_REV_ID                              DBGMCU_IDCODE_REV_ID_Msk
 
 /********************  Bit definition for DBGMCU_CR register  *****************/
@@ -797,12 +789,6 @@ typedef struct
 #define DBGMCU_CR_DBG_STOP                                DBGMCU_CR_DBG_STOP_Msk
 
 /********************  Bit definition for DBGMCU_APB_FZ1 register  ***********/
-#define DBGMCU_APB_FZ1_DBG_IWDG_STOP_Pos                  (12U)
-#define DBGMCU_APB_FZ1_DBG_IWDG_STOP_Msk                  (0x1UL << DBGMCU_APB_FZ1_DBG_IWDG_STOP_Pos) /*!< 0x00004000 */
-#define DBGMCU_APB_FZ1_DBG_IWDG_STOP                      DBGMCU_APB_FZ1_DBG_IWDG_STOP_Msk
-#define DBGMCU_APB_FZ1_DBG_I2C1_STOP_Pos                  (21U)
-#define DBGMCU_APB_FZ1_DBG_I2C1_STOP_Msk                  (0x1UL << DBGMCU_APB_FZ1_DBG_I2C1_STOP_Pos) /*!< 0x00200000 */
-#define DBGMCU_APB_FZ1_DBG_I2C1_STOP                      DBGMCU_APB_FZ1_DBG_I2C1_STOP_Msk
 #define DBGMCU_APB_FZ1_DBG_LPTIM_STOP_Pos                 (31U)
 #define DBGMCU_APB_FZ1_DBG_LPTIM_STOP_Msk                 (0x1UL << DBGMCU_APB_FZ1_DBG_LPTIM_STOP_Pos) /*!< 0x00001000 */
 #define DBGMCU_APB_FZ1_DBG_LPTIM_STOP                     DBGMCU_APB_FZ1_DBG_LPTIM_STOP_Msk
@@ -1163,17 +1149,14 @@ typedef struct
 #define FLASH_OPTR_BOR_LEV_1            (0x2UL << FLASH_OPTR_BOR_LEV_Pos) /*!< 0x00000400 */
 #define FLASH_OPTR_BOR_LEV_2            (0x4UL << FLASH_OPTR_BOR_LEV_Pos) /*!< 0x00000800 */
 #define FLASH_OPTR_IWDG_SW_Pos          (12U)
-#define FLASH_OPTR_IWDG_SW_Msk          (0x1UL << FLASH_OPTR_IWDG_SW_Pos)   /*!< 0x00010000 */
+#define FLASH_OPTR_IWDG_SW_Msk          (0x1UL << FLASH_OPTR_IWDG_SW_Pos)   /*!< 0x00001000 */
 #define FLASH_OPTR_IWDG_SW              FLASH_OPTR_IWDG_SW_Msk
 #define FLASH_OPTR_SWD_MODE_Pos         (13U)
-#define FLASH_OPTR_SWD_MODE_Msk         (0x1UL << FLASH_OPTR_SWD_MODE_Pos)   /*!< 0x00020000 */
+#define FLASH_OPTR_SWD_MODE_Msk         (0x1UL << FLASH_OPTR_SWD_MODE_Pos)   /*!< 0x00002000 */
 #define FLASH_OPTR_SWD_MODE             FLASH_OPTR_SWD_MODE_Msk
 #define FLASH_OPTR_NRST_MODE_Pos        (14U)
-#define FLASH_OPTR_NRST_MODE_Msk        (0x1UL << FLASH_OPTR_NRST_MODE_Pos) /*!< 0x08000000 */
+#define FLASH_OPTR_NRST_MODE_Msk        (0x1UL << FLASH_OPTR_NRST_MODE_Pos) /*!< 0x00004000 */
 #define FLASH_OPTR_NRST_MODE            FLASH_OPTR_NRST_MODE_Msk
-#define FLASH_OPTR_IWDG_STOP_Pos        (15U)
-#define FLASH_OPTR_IWDG_STOP_Msk        (0x1UL << FLASH_OPTR_IWDG_STOP_Pos) /*!< 0x02000000 */
-#define FLASH_OPTR_IWDG_STOP            FLASH_OPTR_IWDG_STOP_Msk
 
 /*******************  Bits definition for FLASH_SDKR register  ****************/
 #define FLASH_SDKR_SDK_STRT_Pos         (0U)
@@ -2107,9 +2090,6 @@ typedef struct
 #define I2C_SR1_OVR_Pos                     (11U)
 #define I2C_SR1_OVR_Msk                     (0x1UL << I2C_SR1_OVR_Pos)          /*!< 0x00000800 */
 #define I2C_SR1_OVR                         I2C_SR1_OVR_Msk                    /*!< Overrun/Underrun */
-#define I2C_SR1_PECERR_Pos                  (12U)
-#define I2C_SR1_PECERR_Msk                  (0x1UL << I2C_SR1_PECERR_Pos)       /*!< 0x00001000 */
-#define I2C_SR1_PECERR                      I2C_SR1_PECERR_Msk                 /*!< PEC Error in reception */
 
 /*******************  Bit definition for I2C_SR2 register  ********************/
 #define I2C_SR2_MSL_Pos                     (0U)
@@ -2199,7 +2179,7 @@ typedef struct
 #define PWR_CR1_FLS_SLPTIME_1        (0x2UL << PWR_CR1_FLS_SLPTIME_Pos)
 
 #define PWR_CR1_LPR_Pos              (14U)
-#define PWR_CR1_LPR_Msk              (0x3UL << PWR_CR1_LPR_Pos)                   /*!< 0x00004000 */
+#define PWR_CR1_LPR_Msk              (0x3UL << PWR_CR1_LPR_Pos)                   /*!< 0x0000C000 */
 #define PWR_CR1_LPR                  PWR_CR1_LPR_Msk                              /*!< Regulator Low-Power Run mode */
 #define PWR_CR1_LPR_0                (0x1UL << PWR_CR1_LPR_Pos)
 #define PWR_CR1_LPR_1                (0x2UL << PWR_CR1_LPR_Pos)
@@ -2239,13 +2219,13 @@ typedef struct
 #define RCC_CR_HSIDIV_1                  (0x2UL << RCC_CR_HSIDIV_Pos)          /*!< 0x00001000 */
 #define RCC_CR_HSIDIV_2                  (0x4UL << RCC_CR_HSIDIV_Pos)          /*!< 0x00002000 */
 #define RCC_CR_HSEEN_Pos                 (18U)
-#define RCC_CR_HSEEN_Msk                 (0x1UL << RCC_CR_HSEEN_Pos)           /*!< 0x00000100 */
+#define RCC_CR_HSEEN_Msk                 (0x1UL << RCC_CR_HSEEN_Pos)           /*!< 0x00040000 */
 #define RCC_CR_HSEEN                     RCC_CR_HSEEN_Msk                      /*!< External High Speed clock enable */
 
 /********************  Bit definition for RCC_ICSCR register  ***************/
 #define RCC_ICSCR_HSI_TRIM_Pos            (0U)
 #define RCC_ICSCR_HSI_TRIM_Msk            (0x1FFFUL << RCC_ICSCR_HSI_TRIM_Pos)   /*!< 0x00001FFF */
-#define RCC_ICSCR_HSI_TRIM                RCC_ICSCR_HSI_TRIM_Msk                 /*!< HSITRIM[14:8] bits */
+#define RCC_ICSCR_HSI_TRIM                RCC_ICSCR_HSI_TRIM_Msk                 /*!< HSITRIM[12:0] bits */
 #define RCC_ICSCR_HSI_TRIM_0              (0x01UL << RCC_ICSCR_HSI_TRIM_Pos)     /*!< 0x00000001 */
 #define RCC_ICSCR_HSI_TRIM_1              (0x02UL << RCC_ICSCR_HSI_TRIM_Pos)     /*!< 0x00000002 */
 #define RCC_ICSCR_HSI_TRIM_2              (0x04UL << RCC_ICSCR_HSI_TRIM_Pos)     /*!< 0x00000004 */
@@ -2540,9 +2520,9 @@ typedef struct
 #define RCC_BDCR_LSECSSD_Pos             (6U)
 #define RCC_BDCR_LSECSSD_Msk             (0x1UL << RCC_BDCR_LSECSSD_Pos)        /*!< 0x00000040 */
 #define RCC_BDCR_LSECSSD                 RCC_BDCR_LSECSSD_Msk
-#define RCC_BDCR_LSCOEN_Pos              (24U)
-#define RCC_BDCR_LSCOEN_Msk              (0x1UL << RCC_BDCR_LSCOEN_Pos)         /*!< 0x01000000 */
-#define RCC_BDCR_LSCOEN                  RCC_BDCR_LSCOEN_Msk
+/* #define RCC_BDCR_LSCOEN_Pos              (24U) */
+/* #define RCC_BDCR_LSCOEN_Msk              (0x1UL << RCC_BDCR_LSCOEN_Pos) */        /*!< 0x01000000 */
+/* #define RCC_BDCR_LSCOEN                  RCC_BDCR_LSCOEN_Msk */
 #define RCC_BDCR_LSCOSEL_Pos             (25U)
 #define RCC_BDCR_LSCOSEL_Msk             (0x1UL << RCC_BDCR_LSCOSEL_Pos)        /*!< 0x02000000 */
 #define RCC_BDCR_LSCOSEL                 RCC_BDCR_LSCOSEL_Msk
@@ -2661,10 +2641,10 @@ typedef struct
 #define SPI_SR_BSY_Msk                      (0x1UL << SPI_SR_BSY_Pos)           /*!< 0x00000080 */
 #define SPI_SR_BSY                          SPI_SR_BSY_Msk                      /*!< Busy flag */
 #define SPI_SR_FRLVL_Pos                    (9U)
-#define SPI_SR_FRLVL_Msk                    (0x1UL << SPI_SR_FRLVL_Pos)         /*!< 0x00000600 */
+#define SPI_SR_FRLVL_Msk                    (0x1UL << SPI_SR_FRLVL_Pos)         /*!< 0x00000200 */
 #define SPI_SR_FRLVL                        SPI_SR_FRLVL_Msk                    /*!< FIFO Reception Level */
 #define SPI_SR_FTLVL_Pos                    (11U)
-#define SPI_SR_FTLVL_Msk                    (0x1UL << SPI_SR_FTLVL_Pos)         /*!< 0x00001800 */
+#define SPI_SR_FTLVL_Msk                    (0x1UL << SPI_SR_FTLVL_Pos)         /*!< 0x00000800 */
 #define SPI_SR_FTLVL                        SPI_SR_FTLVL_Msk                    /*!< FIFO Transmission Level */
 
 /********************  Bit definition for SPI_DR register  ********************/
@@ -2703,10 +2683,10 @@ typedef struct
 #define SYSCFG_CFGR1_I2C_PB3_FMP_Msk              (0x1UL << SYSCFG_CFGR1_I2C_PB3_FMP_Pos) /*!< 0x00020000 */
 #define SYSCFG_CFGR1_I2C_PB3_FMP                  SYSCFG_CFGR1_I2C_PB3_FMP_Msk            /*!< PB3 FMP */
 #define SYSCFG_CFGR1_I2C_PB4_FMP_Pos              (18U)
-#define SYSCFG_CFGR1_I2C_PB4_FMP_Msk              (0x1UL << SYSCFG_CFGR1_I2C_PB4_FMP_Pos) /*!< 0x00400000 */
+#define SYSCFG_CFGR1_I2C_PB4_FMP_Msk              (0x1UL << SYSCFG_CFGR1_I2C_PB4_FMP_Pos) /*!< 0x00040000 */
 #define SYSCFG_CFGR1_I2C_PB4_FMP                  SYSCFG_CFGR1_I2C_PB4_FMP_Msk            /*!< PB4 FMP */
 #define SYSCFG_CFGR1_I2C_PB6_FMP_Pos              (19U)
-#define SYSCFG_CFGR1_I2C_PB6_FMP_Msk              (0x1UL << SYSCFG_CFGR1_I2C_PB6_FMP_Pos) /*!< 0x00200000 */
+#define SYSCFG_CFGR1_I2C_PB6_FMP_Msk              (0x1UL << SYSCFG_CFGR1_I2C_PB6_FMP_Pos) /*!< 0x00080000 */
 #define SYSCFG_CFGR1_I2C_PB6_FMP                  SYSCFG_CFGR1_I2C_PB6_FMP_Msk            /*!< PB6 FMP */
 
 /******************  Bit definition for SYSCFG_CFGR2 register  ****************/
@@ -3347,7 +3327,7 @@ typedef struct
 #define COMP_CSR_INNSEL_Msk             (0x1UL << COMP_CSR_INNSEL_Pos)              /*!< 0x00000020 */
 #define COMP_CSR_INNSEL                 COMP_CSR_INNSEL_Msk                         /*!< COMP negative input select */
 #define COMP_CSR_INPSEL_Pos             (9U)
-#define COMP_CSR_INPSEL_Msk             (0x1UL << COMP_CSR_INPSEL_Pos)              /*!< 0x00000020 */
+#define COMP_CSR_INPSEL_Msk             (0x1UL << COMP_CSR_INPSEL_Pos)              /*!< 0x00000200 */
 #define COMP_CSR_INPSEL                 COMP_CSR_INPSEL_Msk                         /*!< COMP negative input select */
 #define COMP_CSR_WINMODE_Pos            (11U)
 #define COMP_CSR_WINMODE_Msk            (0x1UL << COMP_CSR_WINMODE_Pos)             /*!< 0x00000800 */
@@ -3356,12 +3336,12 @@ typedef struct
 #define COMP_CSR_POLARITY_Msk           (0x1UL << COMP_CSR_POLARITY_Pos)            /*!< 0x00008000 */
 #define COMP_CSR_POLARITY               COMP_CSR_POLARITY_Msk                       /*!< Comparator output polarity */
 #define COMP_CSR_COMP_VCDIV_Pos         (22U)
-#define COMP_CSR_COMP_VCDIV_Msk         (0xFUL << COMP_CSR_COMP_VCDIV_Pos)          /*!< 0x00008000 */
+#define COMP_CSR_COMP_VCDIV_Msk         (0xFUL << COMP_CSR_COMP_VCDIV_Pos)          /*!< 0x03C00000 */
 #define COMP_CSR_COMP_VCDIV             COMP_CSR_COMP_VCDIV_Msk                     /*!< VREFCMP voltage divider configuration, VREFCMP is divided from reference source */
 #define COMP_CSR_COMP_VCDIV_0           (0x1UL << COMP_CSR_COMP_VCDIV_Pos)          /*!< 0x00400000 */
 #define COMP_CSR_COMP_VCDIV_1           (0x2UL << COMP_CSR_COMP_VCDIV_Pos)          /*!< 0x00800000 */
-#define COMP_CSR_COMP_VCDIV_2           (0x4UL << COMP_CSR_COMP_VCDIV_Pos)          /*!< 0x00C00000 */
-#define COMP_CSR_COMP_VCDIV_3           (0x8UL << COMP_CSR_COMP_VCDIV_Pos)          /*!< 0x01000000 */
+#define COMP_CSR_COMP_VCDIV_2           (0x4UL << COMP_CSR_COMP_VCDIV_Pos)          /*!< 0x01000000 */
+#define COMP_CSR_COMP_VCDIV_3           (0x8UL << COMP_CSR_COMP_VCDIV_Pos)          /*!< 0x02000000 */
 #define COMP_CSR_COMP_VCDIV_EN_Pos      (26U)
 #define COMP_CSR_COMP_VCDIV_EN_Msk      (0x1UL << COMP_CSR_COMP_VCDIV_EN_Pos)       /*!< 0x04000000 */
 #define COMP_CSR_COMP_VCDIV_EN          COMP_CSR_COMP_VCDIV_EN_Msk                  /*!< VREFCMP enable, active high. */

@@ -64,10 +64,10 @@
             "path":"../Src/main.c"
           },
           {
-            "path":"../Src/py32l020_it.c"
+            "path":"../Src/py32l020_hal_msp.c"
           },
           {
-            "path":"../Src/py32l020_hal_msp.c"
+            "path":"../Src/py32l020_it.c"
           }
         ],
         "folders": []

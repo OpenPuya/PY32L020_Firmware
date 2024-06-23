@@ -36,17 +36,17 @@ BUILD_DIR = build\Project
 ######################################
 # C sources
 C_SOURCES =  \../Src/main.c \
-../Src/py32l020_it.c \
 ../Src/py32l020_hal_msp.c \
+../Src/py32l020_it.c \
 ../Src/system_py32l020.c \
 ../../../../../../Drivers/BSP/PY32L020xx_Start_Kit/py32l020xx_Start_Kit.c \
 ../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal.c \
 ../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_rcc.c \
 ../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_rcc_ex.c \
-../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_cortex.c \
+../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_uart.c \
 ../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_gpio.c \
 ../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_pwr.c \
-../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_uart.c \
+../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_cortex.c \
 ../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_flash.c
 
 

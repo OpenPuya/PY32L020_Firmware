@@ -94,7 +94,9 @@ static void APP_ConfigTIM1XOR(void)
 
   /* Select TIM1 CH1, CH2 and CH3 channles are connected to the TI1 input (XOR combination) */
   LL_TIM_IC_EnableXORCombination(TIM1);
-
+  
+  LL_TIM_IC_SetPolarity(TIM1,LL_TIM_CHANNEL_CH1,LL_TIM_IC_POLARITY_BOTHEDGE);
+  
   /* Configure CH1、CH2、CH3 in input mode */
   LL_TIM_IC_SetActiveInput(TIM1,LL_TIM_CHANNEL_CH1,LL_TIM_ACTIVEINPUT_DIRECTTI);
   LL_TIM_IC_SetActiveInput(TIM1,LL_TIM_CHANNEL_CH2,LL_TIM_ACTIVEINPUT_DIRECTTI);

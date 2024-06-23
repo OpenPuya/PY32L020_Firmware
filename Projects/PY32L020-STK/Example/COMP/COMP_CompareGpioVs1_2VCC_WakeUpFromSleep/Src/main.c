@@ -102,6 +102,7 @@ static void APP_RccInit(void)
   
   RCCCONF.OscillatorType = RCC_OSCILLATORTYPE_LSI;        /* RCC uses internal LSI */
   RCCCONF.LSIState = RCC_LSI_ON;                          /* Enable LSI */
+  RCCCONF.LSICalibrationValue = RCC_LSICALIBRATION_32768Hz ; /* Set LSI 32768 hz */
   HAL_RCC_OscConfig(&RCCCONF);                            /* Initialize clock settings */
   
   HAL_RCCEx_EnableLSCO(RCC_LSCOSOURCE_LSI);               /* Set LSC Source LSI and Enable LSC */

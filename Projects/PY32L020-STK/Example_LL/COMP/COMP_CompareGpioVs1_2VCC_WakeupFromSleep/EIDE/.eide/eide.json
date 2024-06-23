@@ -44,7 +44,11 @@
         "files":[
           {
             "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_ll_utils.c"
-          }],
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_ll_comp.c"
+          }
+        ],
         "folders": []
       },
       {
