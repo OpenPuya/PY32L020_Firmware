@@ -299,4 +299,4 @@ void              HAL_EXTI_GenerateSWI(EXTI_HandleTypeDef *hexti);
 
 #endif /* __PY32L020_HAL_EXTI_H */
 
-/************************ (C) COPYRIGHT Puya *****END OF FILE****/
+/************************ (C) COPYRIGHT Puya *****END OF FILE******************/

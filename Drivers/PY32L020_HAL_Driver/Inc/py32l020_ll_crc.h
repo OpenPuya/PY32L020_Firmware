@@ -209,4 +209,4 @@ ErrorStatus LL_CRC_DeInit(CRC_TypeDef *CRCx);
 
 #endif /* PY32L020_LL_CRC_H */
 
-/************************ (C) COPYRIGHT Puya *****END OF FILE****/
+/************************ (C) COPYRIGHT Puya *****END OF FILE******************/

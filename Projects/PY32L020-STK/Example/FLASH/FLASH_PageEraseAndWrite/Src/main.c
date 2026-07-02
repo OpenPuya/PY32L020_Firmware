@@ -80,7 +80,7 @@ int main(void)
   BSP_USART_Config();
 
   /* Wait For Button */
-  while(BSP_PB_GetState(BUTTON_KEY) == 1);
+  while(BSP_PB_GetState(BUTTON_KEY));
 
   /* Unlock Flash */
   HAL_FLASH_Unlock();
@@ -216,4 +216,4 @@ void assert_failed(uint8_t *file, uint32_t line)
 }
 #endif /* USE_FULL_ASSERT */
 
-/************************ (C) COPYRIGHT Puya *****END OF FILE****/
+/************************ (C) COPYRIGHT Puya *****END OF FILE******************/

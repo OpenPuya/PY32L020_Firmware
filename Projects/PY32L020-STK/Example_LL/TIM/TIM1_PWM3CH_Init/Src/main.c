@@ -64,7 +64,7 @@ int main(void)
   BSP_PB_Init(BUTTON_USER,BUTTON_MODE_GPIO);
   
   /* wait the button to be pressed */
-  while(BSP_PB_GetState(BUTTON_USER) != 0)
+  while(BSP_PB_GetState(BUTTON_USER))
   {}
   
   /* Set TIM1 PWM related GPIO */
@@ -91,11 +91,17 @@ static void APP_ConfigPWMChannel(void)
   TIM1CH1MapInit.Pin        = LL_GPIO_PIN_5|LL_GPIO_PIN_4;
   TIM1CH1MapInit.Mode       = LL_GPIO_MODE_ALTERNATE;
   TIM1CH1MapInit.Alternate  = LL_GPIO_AF_2; 
+  TIM1CH1MapInit.Speed      = LL_GPIO_SPEED_FREQ_HIGH;
+  TIM1CH1MapInit.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+  TIM1CH1MapInit.Pull       = LL_GPIO_PULL_NO;
   LL_GPIO_Init(GPIOA,&TIM1CH1MapInit);
   
   TIM1CH1MapInit.Pin        = LL_GPIO_PIN_0;
   TIM1CH1MapInit.Mode       = LL_GPIO_MODE_ALTERNATE;
   TIM1CH1MapInit.Alternate  = LL_GPIO_AF_2; 
+  TIM1CH1MapInit.Speed      = LL_GPIO_SPEED_FREQ_HIGH;
+  TIM1CH1MapInit.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+  TIM1CH1MapInit.Pull       = LL_GPIO_PULL_NO;
   LL_GPIO_Init(GPIOB,&TIM1CH1MapInit);
    
   /* Set PWM channel */

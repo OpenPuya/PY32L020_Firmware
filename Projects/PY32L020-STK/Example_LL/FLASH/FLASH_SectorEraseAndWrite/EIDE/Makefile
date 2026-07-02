@@ -29,20 +29,16 @@ OPT = -Og
 # paths
 #######################################
 # Build path
-BUILD_DIR = build\Project
+BUILD_DIR = Project
 
 ######################################
 # source
 ######################################
 # C sources
 C_SOURCES =  \../Src/main.c \
-../Src/py32l020_hal_msp.c \
 ../Src/py32l020_it.c \
 ../Src/system_py32l020.c \
 ../../../../../../Drivers/BSP/PY32L020xx_Start_Kit/py32l020xx_ll_Start_Kit.c \
-../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_flash.c \
-../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal.c \
-../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_cortex.c \
 ../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_ll_utils.c
 
 
@@ -92,8 +88,8 @@ AS_DEFS =
 
 # C defines
 C_DEFS =  \
--DUSE_HAL_DRIVER\
--DPY32L020x5
+-DPY32L020x5\
+-DUSE_FULL_LL_DRIVER
 
 
 # AS includes

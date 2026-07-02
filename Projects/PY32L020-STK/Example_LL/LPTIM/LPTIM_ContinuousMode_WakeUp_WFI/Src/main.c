@@ -86,7 +86,7 @@ int main(void)
   BSP_LED_On(LED_GREEN);
 
   /* Wait the button be pressed */
-  while (BSP_PB_GetState(BUTTON_USER) != 0)
+  while (BSP_PB_GetState(BUTTON_USER))
   {
   }
 
@@ -214,7 +214,7 @@ static void APP_ConfigLptim(void)
   LL_LPTIM_Enable(LPTIM);
 
   /* Set autoreload value */
-  LL_LPTIM_SetAutoReload(LPTIM, 51);
+  LL_LPTIM_SetAutoReload(LPTIM, 51 - 1);
 
   /* LPTIM starts in continuous mode */
   LL_LPTIM_StartCounter(LPTIM, LL_LPTIM_OPERATING_MODE_CONTINUOUS);

@@ -181,9 +181,10 @@ extern "C" {
 #define VREFINT_CAL_VREF                   ( 1200U)                    /* Analog voltage reference (Vref+) value (tolerance: +-10 mV) (unit: mV). */
 /* Temperature sensor */
 #define TEMPSENSOR_CAL1_ADDR               ((uint16_t*) (0x1fff0114))  /* Internal temperature sensor, address of parameter TS_CAL1: temperature sensor ADC raw data acquired at temperature  30 DegC (tolerance: +-5 DegC), Vref+ = 3.3 V (tolerance: +-10 mV). */
-#define TEMPSENSOR_CAL2_ADDR               ((uint16_t*) (0x1fff0118))  /* Internal temperature sensor, address of parameter TS_CAL2: temperature sensor ADC raw data acquired at temperature  85 DegC (tolerance: +-5 DegC), Vref+ = 3.3 V (tolerance: +-10 mV). */
+#define TEMPSENSOR_CAL2_ADDR               ((uint16_t*) (0x1fff0118))  /* Internal temperature sensor, address of parameter TS_CAL2: temperature sensor ADC raw data acquired at temperature 85 or 105 DegC (tolerance: +-5 DegC), Vref+ = 3.3 V (tolerance: +-10 mV). */
 #define TEMPSENSOR_CAL1_TEMP               (( int32_t)   30)           /* Internal temperature sensor, temperature at which temperature sensor has been calibrated in production for data into TEMPSENSOR_CAL1_ADDR (tolerance: +-5 DegC) (unit: DegC). */
 #define TEMPSENSOR_CAL2_TEMP               (( int32_t)   85)           /* Internal temperature sensor, temperature at which temperature sensor has been calibrated in production for data into TEMPSENSOR_CAL2_ADDR (tolerance: +-5 DegC) (unit: DegC). */
+#define TEMPSENSOR_CAL3_TEMP               (( int32_t)   105)          /* Internal temperature sensor, temperature at which temperature sensor has been calibrated in production for data into TEMPSENSOR_CAL2_ADDR (tolerance: +-5 DegC) (unit: DegC). */
 #define TEMPSENSOR_CAL_VREFANALOG          ( 3300U)                    /* Analog voltage reference (Vref+) voltage with which temperature sensor has been calibrated in production (+-10 mV) (unit: mV). */
 
 /* Definitions of ADC hardware constraints delays */
@@ -422,7 +423,9 @@ typedef struct
 /** @defgroup ADC_LL_VREFBUF_VOLTAGE  ADC instance - Vrefbuf Voltage
   * @{ 
   */
-#define LL_ADC_VREFBUF_1P5V     (0x00000000U)           /*!< VREFBUF Output voltage 1.5V. */
+#define LL_ADC_VREFBUF_1P5V      (0x00000000U)            /*!< VREFBUF Output voltage 1.5V. */
+#define LL_ADC_VREFBUF_2P048V    (ADC_CR_VREFBUFF_SEL_0)  /*!< VREFBUF 2.048V */
+#define LL_ADC_VREFBUF_2P5V      (ADC_CR_VREFBUFF_SEL_1)  /*!< VREFBUF 2.5V */
 
 /**
   * @}
@@ -493,7 +496,7 @@ typedef struct
 #define LL_ADC_SAMPLINGTIME_13CYCLES_5     (                 ADC_SMPR_SMP_1 | ADC_SMPR_SMP_0)    /*!< Sampling time 13.5 ADC clock cycles */
 #define LL_ADC_SAMPLINGTIME_28CYCLES_5     (ADC_SMPR_SMP_2                                  )    /*!< Sampling time 28.5 ADC clock cycles */
 #define LL_ADC_SAMPLINGTIME_41CYCLES_5     (ADC_SMPR_SMP_2                  | ADC_SMPR_SMP_0)    /*!< Sampling time 41.5 ADC clock cycles */
-#define LL_ADC_SAMPLINGTIME_71CYCLES_5     (ADC_SMPR_SMP_2 | ADC_SMPR_SMP_1                 )    /*!< Sampling time 71.5 ADC clock cycles */
+#define LL_ADC_SAMPLINGTIME_134CYCLES_5    (ADC_SMPR_SMP_2 | ADC_SMPR_SMP_1                 )    /*!< Sampling time 134.5 ADC clock cycles */
 #define LL_ADC_SAMPLINGTIME_239CYCLES_5    (ADC_SMPR_SMP_2 | ADC_SMPR_SMP_1 | ADC_SMPR_SMP_0)    /*!< Sampling time 239.5 ADC clock cycles */
 /**
   * @}
@@ -621,6 +624,29 @@ typedef struct
   * @}
   */
 
+/** @defgroup ADC_Exported_Macros ADC Exported Macros
+  * @{
+  */
+/* Macro for application program usage, and possibly can be used into code of */
+/* final user.                                                                */
+
+#define LL_ADC_VREFBUF_1P5    (((*(uint16_t *)(0x1FFF002E))       & 0xf)        + \
+                               ((*(uint16_t *)(0x1FFF002E) >> 4 ) & 0xf) * 10   + \
+                               ((*(uint16_t *)(0x1FFF002E) >> 8 ) & 0xf) * 100  + \
+                               ((*(uint16_t *)(0x1FFF002E) >> 12) & 0xf) * 1000)
+
+#define LL_ADC_VREFBUF_2P048  (((*(uint16_t *)(0x1FFF0032))       & 0xf)        + \
+                               ((*(uint16_t *)(0x1FFF0032) >> 4 ) & 0xf) * 10   + \
+                               ((*(uint16_t *)(0x1FFF0032) >> 8 ) & 0xf) * 100  + \
+                               ((*(uint16_t *)(0x1FFF0032) >> 12) & 0xf) * 1000)
+
+#define LL_ADC_VREFBUF_2P5    (((*(uint16_t *)(0x1FFF0036))       & 0xf)        + \
+                               ((*(uint16_t *)(0x1FFF0036) >> 4 ) & 0xf) * 10   + \
+                               ((*(uint16_t *)(0x1FFF0036) >> 8 ) & 0xf) * 100  + \
+                               ((*(uint16_t *)(0x1FFF0036) >> 12) & 0xf) * 1000)
+/**
+  * @}
+  */
 
 /* Exported macro ------------------------------------------------------------*/
 /** @defgroup ADC_LL_Exported_Macros ADC Exported Macros
@@ -1170,7 +1196,7 @@ typedef struct
   *         @arg @ref LL_ADC_RESOLUTION_10B
   *         @arg @ref LL_ADC_RESOLUTION_8B
   *         @arg @ref LL_ADC_RESOLUTION_6B
-  * @retval Temperature (unit: degree Celsius)   
+  * @retval Temperature (unit: degree Celsius)
   */
 #define __LL_ADC_CALC_TEMPERATURE(__VREFANALOG_VOLTAGE__,\
                                   __TEMPSENSOR_ADC_DATA__,\
@@ -1185,6 +1211,113 @@ typedef struct
     ) / (int32_t)((int32_t)*TEMPSENSOR_CAL2_ADDR - (int32_t)*TEMPSENSOR_CAL1_ADDR) \
    ) + TEMPSENSOR_CAL1_TEMP                                                        \
   )
+
+/**
+  * @brief  Helper macro to calculate the temperature (unit: degree Celsius)
+  *         from ADC conversion data of internal temperature sensor.
+  * @note   Computation is using temperature sensor calibration values
+  *         stored in system memory for each device during production.
+  * @note   Calculation formula:
+  *           Temperature = ((TS_ADC_DATA - TS_CAL1)
+  *                           * (TS_CAL2_TEMP - TS_CAL1_TEMP))
+  *                         / (TS_CAL2 - TS_CAL1) + TS_CAL1_TEMP
+  *           with TS_ADC_DATA = temperature sensor raw data measured by ADC
+  *                Avg_Slope = (TS_CAL2 - TS_CAL1)
+  *                            / (TS_CAL2_TEMP - TS_CAL1_TEMP)
+  *                TS_CAL1   = equivalent TS_ADC_DATA at temperature
+  *                            TEMP_DEGC_CAL1 (calibrated in factory)
+  *                TS_CAL2   = equivalent TS_ADC_DATA at temperature
+  *                            TEMP_DEGC_CAL2 (calibrated in factory)
+  *         Caution: Calculation relevancy under reserve that calibration
+  *                  parameters are correct (address and data).
+  *                  To calculate temperature using temperature sensor
+  *                  datasheet typical values (generic values less, therefore
+  *                  less accurate than calibrated values),
+  *                  use helper macro @ref __LL_ADC_CALC_TEMPERATURE_TYP_PARAMS().
+  * @note   As calculation input, the analog reference voltage (Vref+) must be
+  *         defined as it impacts the ADC LSB equivalent voltage.
+  * @note   Analog reference voltage (Vref+) must be either known from
+  *         user board environment or can be calculated using ADC measurement
+  *         and ADC helper macro @ref __LL_ADC_CALC_VREFANALOG_VOLTAGE().
+  * @param  __VREFANALOG_VOLTAGE__  Analog reference voltage (unit: mV)
+  * @param  __TEMPSENSOR_ADC_DATA__ ADC conversion data of internal
+  *                                 temperature sensor (unit: digital value).
+  * @param  __ADC_RESOLUTION__      ADC resolution at which internal temperature
+  *                                 sensor voltage has been measured.
+  *         This parameter can be one of the following values:
+  *         @arg @ref LL_ADC_RESOLUTION_12B
+  *         @arg @ref LL_ADC_RESOLUTION_10B
+  *         @arg @ref LL_ADC_RESOLUTION_8B
+  *         @arg @ref LL_ADC_RESOLUTION_6B
+  * @retval Temperature (unit: degree Celsius)
+  */
+#define __LL_ADC_CALC_TEMPERATURE_85(__VREFANALOG_VOLTAGE__,\
+                                  __TEMPSENSOR_ADC_DATA__,\
+                                  __ADC_RESOLUTION__)                              \
+  (((( ((int32_t)((__LL_ADC_CONVERT_DATA_RESOLUTION((__TEMPSENSOR_ADC_DATA__),     \
+                                                    (__ADC_RESOLUTION__),          \
+                                                    LL_ADC_RESOLUTION_12B)         \
+                   * (__VREFANALOG_VOLTAGE__))                                     \
+                  / TEMPSENSOR_CAL_VREFANALOG)                                     \
+        - (int32_t) *TEMPSENSOR_CAL1_ADDR)                                         \
+     ) * (int32_t)(TEMPSENSOR_CAL2_TEMP - TEMPSENSOR_CAL1_TEMP)                    \
+    ) / (int32_t)((int32_t)*TEMPSENSOR_CAL2_ADDR - (int32_t)*TEMPSENSOR_CAL1_ADDR) \
+   ) + TEMPSENSOR_CAL1_TEMP                                                        \
+  )
+
+/**
+  * @brief  Helper macro to calculate the temperature (unit: degree Celsius)
+  *         from ADC conversion data of internal temperature sensor.
+  * @note   Computation is using temperature sensor calibration values
+  *         stored in system memory for each device during production.
+  * @note   Calculation formula:
+  *           Temperature = ((TS_ADC_DATA - TS_CAL1)
+  *                           * (TS_CAL3_TEMP - TS_CAL1_TEMP))
+  *                         / (TS_CAL2 - TS_CAL1) + TS_CAL1_TEMP
+  *           with TS_ADC_DATA = temperature sensor raw data measured by ADC
+  *                Avg_Slope = (TS_CAL2 - TS_CAL1)
+  *                            / (TS_CAL3_TEMP - TS_CAL1_TEMP)
+  *                TS_CAL1   = equivalent TS_ADC_DATA at temperature
+  *                            TEMP_DEGC_CAL1 (calibrated in factory)
+  *                TS_CAL2   = equivalent TS_ADC_DATA at temperature
+  *                            TEMP_DEGC_CAL2 (calibrated in factory)
+  *         Caution: Calculation relevancy under reserve that calibration
+  *                  parameters are correct (address and data).
+  *                  To calculate temperature using temperature sensor
+  *                  datasheet typical values (generic values less, therefore
+  *                  less accurate than calibrated values),
+  *                  use helper macro @ref __LL_ADC_CALC_TEMPERATURE_TYP_PARAMS().
+  * @note   As calculation input, the analog reference voltage (Vref+) must be
+  *         defined as it impacts the ADC LSB equivalent voltage.
+  * @note   Analog reference voltage (Vref+) must be either known from
+  *         user board environment or can be calculated using ADC measurement
+  *         and ADC helper macro @ref __LL_ADC_CALC_VREFANALOG_VOLTAGE().
+  * @param  __VREFANALOG_VOLTAGE__  Analog reference voltage (unit: mV)
+  * @param  __TEMPSENSOR_ADC_DATA__ ADC conversion data of internal
+  *                                 temperature sensor (unit: digital value).
+  * @param  __ADC_RESOLUTION__      ADC resolution at which internal temperature
+  *                                 sensor voltage has been measured.
+  *         This parameter can be one of the following values:
+  *         @arg @ref LL_ADC_RESOLUTION_12B
+  *         @arg @ref LL_ADC_RESOLUTION_10B
+  *         @arg @ref LL_ADC_RESOLUTION_8B
+  *         @arg @ref LL_ADC_RESOLUTION_6B
+  * @retval Temperature (unit: degree Celsius)
+  */
+#define __LL_ADC_CALC_TEMPERATURE_105(__VREFANALOG_VOLTAGE__,\
+                                  __TEMPSENSOR_ADC_DATA__,\
+                                  __ADC_RESOLUTION__)                              \
+  (((( ((int32_t)((__LL_ADC_CONVERT_DATA_RESOLUTION((__TEMPSENSOR_ADC_DATA__),     \
+                                                    (__ADC_RESOLUTION__),          \
+                                                    LL_ADC_RESOLUTION_12B)         \
+                   * (__VREFANALOG_VOLTAGE__))                                     \
+                  / TEMPSENSOR_CAL_VREFANALOG)                                     \
+        - (int32_t) *TEMPSENSOR_CAL1_ADDR)                                         \
+     ) * (int32_t)(TEMPSENSOR_CAL3_TEMP - TEMPSENSOR_CAL1_TEMP)                    \
+    ) / (int32_t)((int32_t)*TEMPSENSOR_CAL2_ADDR - (int32_t)*TEMPSENSOR_CAL1_ADDR) \
+   ) + TEMPSENSOR_CAL1_TEMP                                                        \
+  )
+
 
 /**
   * @brief  Helper macro to calculate the temperature (unit: degree Celsius)
@@ -1501,7 +1634,7 @@ __STATIC_INLINE uint32_t LL_ADC_GetLowPowerMode(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_SAMPLINGTIME_13CYCLES_5
   *         @arg @ref LL_ADC_SAMPLINGTIME_28CYCLES_5
   *         @arg @ref LL_ADC_SAMPLINGTIME_41CYCLES_5
-  *         @arg @ref LL_ADC_SAMPLINGTIME_71CYCLES_5
+  *         @arg @ref LL_ADC_SAMPLINGTIME_134CYCLES_5
   *         @arg @ref LL_ADC_SAMPLINGTIME_239CYCLES_5
   * @retval None
   */
@@ -1522,7 +1655,7 @@ __STATIC_INLINE void LL_ADC_SetSamplingTimeCommonChannels(ADC_TypeDef *ADCx, uin
   *         @arg @ref LL_ADC_SAMPLINGTIME_13CYCLES_5
   *         @arg @ref LL_ADC_SAMPLINGTIME_28CYCLES_5
   *         @arg @ref LL_ADC_SAMPLINGTIME_41CYCLES_5
-  *         @arg @ref LL_ADC_SAMPLINGTIME_71CYCLES_5
+  *         @arg @ref LL_ADC_SAMPLINGTIME_134CYCLES_5
   *         @arg @ref LL_ADC_SAMPLINGTIME_239CYCLES_5
   */
 __STATIC_INLINE uint32_t LL_ADC_GetSamplingTimeCommonChannels(ADC_TypeDef *ADCx)
@@ -2865,4 +2998,4 @@ void        LL_ADC_REG_StructInit(LL_ADC_REG_InitTypeDef *ADC_REG_InitStruct);
 
 #endif /* __PY32L020_LL_ADC_H */
 
-/************************ (C) COPYRIGHT Puya *****END OF FILE****/
+/************************ (C) COPYRIGHT Puya *****END OF FILE******************/

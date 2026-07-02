@@ -214,7 +214,7 @@ typedef struct
   *
   * @param  __LPTIM1_CLKSOURCE__ specifies the LPTIM1 clock source.
   *          This parameter can be one of the following values:
-  *            @arg @ref RCC_LPTIMCLKSOURCE_PCLK  PCLK1 selected as LPTIM1 clock
+  *            @arg @ref RCC_LPTIMCLKSOURCE_PCLK  PCLK selected as LPTIM1 clock
   *            @arg @ref RCC_LPTIMCLKSOURCE_LSI  LSI  selected as LPTIM1 clock
   *            @arg @ref RCC_LPTIMCLKSOURCE_LSE  LSE  selected as LPTIM1 clock
   * @note   Depending on devices and packages, some clocks may not be available.
@@ -230,7 +230,7 @@ typedef struct
 
 /** @brief  Macro to get the LPTIM clock source.
   * @retval The clock source can be one of the following values:
-  *            @arg @ref RCC_LPTIMCLKSOURCE_PCLK  PCLK1 selected as LPTIM clock
+  *            @arg @ref RCC_LPTIMCLKSOURCE_PCLK  PCLK selected as LPTIM clock
   *            @arg @ref RCC_LPTIMCLKSOURCE_LSI  LSI selected as LPTIM clock
   *            @arg @ref RCC_LPTIMCLKSOURCE_LSE  LSE selected as LPTIM clock
   * @note   Depending on devices and packages, some clocks may not be available.
@@ -338,4 +338,4 @@ void              HAL_RCCEx_DisableLSCO(void);
 
 #endif /* __PY32L020_HAL_RCC_EX_H */
 
-/************************ (C) COPYRIGHT Puya *****END OF FILE****/
+/************************ (C) COPYRIGHT Puya *****END OF FILE******************/

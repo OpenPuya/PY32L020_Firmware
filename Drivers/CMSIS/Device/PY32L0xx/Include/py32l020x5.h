@@ -9,8 +9,16 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) Puya Semiconductor Co.
+  * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
   * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by Puya under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  * @attention
   *
   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.</center></h2>
@@ -329,7 +337,7 @@ typedef struct
   __IO uint32_t BDCR;        /*!< RCC Backup Domain Control Register,                                     Address offset: 0x5C */
   __IO uint32_t CSR;         /*!< RCC Unregulated Domain Clock Control and Status Register,               Address offset: 0x60 */
        uint32_t RESERVED4[7];/*!< Reserved,                                                               Address offset: 0x64-0x7F */
-  __IO uint32_t VREFBUF;     /*!< RCC VREFBUF calibration Register,                                       Address offset: 0x80 */
+/*  __IO uint32_t VREFBUF; */    /*!< RCC VREFBUF calibration Register,                                       Address offset: 0x80 */
 } RCC_TypeDef;
 
 /**
@@ -362,7 +370,7 @@ typedef struct
   __IO uint32_t CR1;         /*!< TIM control register 1,                   Address offset: 0x00 */
   __IO uint32_t CR2;         /*!< TIM control register 2,                   Address offset: 0x04 */
   __IO uint32_t SMCR;        /*!< TIM slave mode control register,          Address offset: 0x08 */
-  __IO uint32_t DIER;        /*!< TIM DMA/interrupt enable register,        Address offset: 0x0C */
+  __IO uint32_t DIER;        /*!< TIM interrupt enable register,            Address offset: 0x0C */
   __IO uint32_t SR;          /*!< TIM status register,                      Address offset: 0x10 */
   __IO uint32_t EGR;         /*!< TIM event generation register,            Address offset: 0x14 */
   __IO uint32_t CCMR1;       /*!< TIM capture/compare mode register 1,      Address offset: 0x18 */
@@ -661,8 +669,11 @@ typedef struct
 
 /******************  Bit definition for ADC_CHSELR register  ******************/
 #define ADC_CHSELR_CHSEL_Pos      (0U)
-#define ADC_CHSELR_CHSEL_Msk      (0x7FFUL << ADC_CHSELR_CHSEL_Pos)             /*!< 0x00001BFF */
+#define ADC_CHSELR_CHSEL_Msk      (0x7FFUL << ADC_CHSELR_CHSEL_Pos)             /*!< 0x000007FF */
 #define ADC_CHSELR_CHSEL           ADC_CHSELR_CHSEL_Msk                         /*!< ADC group regular sequencer channels, available when ADC_CFGR1_CHSELRMOD is reset */
+#define ADC_CHSELR_CHSEL10_Pos    (10U)
+#define ADC_CHSELR_CHSEL10_Msk    (0x1UL << ADC_CHSELR_CHSEL10_Pos)             /*!< 0x00000400 */
+#define ADC_CHSELR_CHSEL10         ADC_CHSELR_CHSEL10_Msk                       /*!< ADC group regular sequencer channel 10, available when ADC_CFGR1_CHSELRMOD is reset */
 #define ADC_CHSELR_CHSEL9_Pos     (9U)
 #define ADC_CHSELR_CHSEL9_Msk     (0x1UL << ADC_CHSELR_CHSEL9_Pos)              /*!< 0x00000200 */
 #define ADC_CHSELR_CHSEL9          ADC_CHSELR_CHSEL9_Msk                        /*!< ADC group regular sequencer channel 9, available when ADC_CFGR1_CHSELRMOD is reset */
@@ -789,6 +800,9 @@ typedef struct
 #define DBGMCU_CR_DBG_STOP                                DBGMCU_CR_DBG_STOP_Msk
 
 /********************  Bit definition for DBGMCU_APB_FZ1 register  ***********/
+#define DBGMCU_APB_FZ1_DBG_IWDG_STOP_Pos                  (12U)
+#define DBGMCU_APB_FZ1_DBG_IWDG_STOP_Msk                  (0x1UL << DBGMCU_APB_FZ1_DBG_IWDG_STOP_Pos) /*!< 0x00004000 */
+#define DBGMCU_APB_FZ1_DBG_IWDG_STOP                      DBGMCU_APB_FZ1_DBG_IWDG_STOP_Msk
 #define DBGMCU_APB_FZ1_DBG_LPTIM_STOP_Pos                 (31U)
 #define DBGMCU_APB_FZ1_DBG_LPTIM_STOP_Msk                 (0x1UL << DBGMCU_APB_FZ1_DBG_LPTIM_STOP_Pos) /*!< 0x00001000 */
 #define DBGMCU_APB_FZ1_DBG_LPTIM_STOP                     DBGMCU_APB_FZ1_DBG_LPTIM_STOP_Msk
@@ -1157,6 +1171,9 @@ typedef struct
 #define FLASH_OPTR_NRST_MODE_Pos        (14U)
 #define FLASH_OPTR_NRST_MODE_Msk        (0x1UL << FLASH_OPTR_NRST_MODE_Pos) /*!< 0x00004000 */
 #define FLASH_OPTR_NRST_MODE            FLASH_OPTR_NRST_MODE_Msk
+#define FLASH_OPTR_IWDG_STOP_Pos        (15U)
+#define FLASH_OPTR_IWDG_STOP_Msk        (0x1UL << FLASH_OPTR_IWDG_STOP_Pos) /*!< 0x02000000 */
+#define FLASH_OPTR_IWDG_STOP            FLASH_OPTR_IWDG_STOP_Msk
 
 /*******************  Bits definition for FLASH_SDKR register  ****************/
 #define FLASH_SDKR_SDK_STRT_Pos         (0U)
@@ -2272,6 +2289,11 @@ typedef struct
 #define RCC_CFGR_SW_1                  (0x2UL << RCC_CFGR_SW_Pos)              /*!< 0x00000002 */
 #define RCC_CFGR_SW_2                  (0x4UL << RCC_CFGR_SW_Pos)              /*!< 0x00000004 */
 
+#define RCC_CFGR_SW_HSISYS              (0UL)                                  /*!< HSISYS used as system clock */
+#define RCC_CFGR_SW_HSE                 (0x00000001UL)                         /*!< HSE used as system clock */
+#define RCC_CFGR_SW_LSI                 (0x00000003UL)                         /*!< LSI used as system clock */
+#define RCC_CFGR_SW_LSE                 (0x00000004UL)                         /*!< LSE used as system clock */
+
 /*!< SWS configuration */
 #define RCC_CFGR_SWS_Pos               (3U)
 #define RCC_CFGR_SWS_Msk               (0x7UL << RCC_CFGR_SWS_Pos)             /*!< 0x00000038 */
@@ -2520,9 +2542,9 @@ typedef struct
 #define RCC_BDCR_LSECSSD_Pos             (6U)
 #define RCC_BDCR_LSECSSD_Msk             (0x1UL << RCC_BDCR_LSECSSD_Pos)        /*!< 0x00000040 */
 #define RCC_BDCR_LSECSSD                 RCC_BDCR_LSECSSD_Msk
-/* #define RCC_BDCR_LSCOEN_Pos              (24U) */
-/* #define RCC_BDCR_LSCOEN_Msk              (0x1UL << RCC_BDCR_LSCOEN_Pos) */        /*!< 0x01000000 */
-/* #define RCC_BDCR_LSCOEN                  RCC_BDCR_LSCOEN_Msk */
+/* #define RCC_BDCR_LSCOEN_Pos             (24U) */
+/* #define RCC_BDCR_LSCOEN_Msk             (0x1UL << RCC_BDCR_LSCOEN_Pos) */        /*!< 0x01000000 */
+/* #define RCC_BDCR_LSCOEN                 RCC_BDCR_LSCOEN_Msk */
 #define RCC_BDCR_LSCOSEL_Pos             (25U)
 #define RCC_BDCR_LSCOSEL_Msk             (0x1UL << RCC_BDCR_LSCOSEL_Pos)        /*!< 0x02000000 */
 #define RCC_BDCR_LSCOSEL                 RCC_BDCR_LSCOSEL_Msk
@@ -2557,9 +2579,9 @@ typedef struct
 #define RCC_CSR_IWDGRSTF                 RCC_CSR_IWDGRSTF_Msk
 
 /********************  Bit definition for RCC_CSR register  *******************/
-#define RCC_CSR_VREFBUF_TRIM_Pos         (0U)
-#define RCC_CSR_VREFBUF_TRIM_Msk         (0x1FUL << RCC_CSR_VREFBUF_TRIM_Pos)        /*!< 0x0000001F */
-#define RCC_CSR_VREFBUF_TRIM             RCC_CSR_VREFBUF_TRIM_Msk
+/* #define RCC_CSR_VREFBUF_TRIM_Pos        (0U) */
+/* #define RCC_CSR_VREFBUF_TRIM_Msk        (0x1FUL << RCC_CSR_VREFBUF_TRIM_Pos) */  /*!< 0x0000001F */
+/* #define RCC_CSR_VREFBUF_TRIM            RCC_CSR_VREFBUF_TRIM_Msk */
 
 /******************************************************************************/
 /*                                                                            */
@@ -3653,8 +3675,7 @@ typedef struct
 #define IS_TIM_REMAP_INSTANCE(INSTANCE)    ((INSTANCE) == TIM1)
 
 /****************** TIM Instances : supporting repetition counter *************/
-#define IS_TIM_REPETITION_COUNTER_INSTANCE(INSTANCE)  (((INSTANCE) == TIM1)  || \
-                                                       ((INSTANCE) == TIM14))
+#define IS_TIM_REPETITION_COUNTER_INSTANCE(INSTANCE)  ((INSTANCE) == TIM1)
 
 /****************** TIM Instances : supporting synchronization ****************/
 #define IS_TIM_SYNCHRO_INSTANCE(INSTANCE)  IS_TIM_MASTER_INSTANCE(INSTANCE)

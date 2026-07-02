@@ -6,10 +6,9 @@
 4=../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_pwr.c
 5=../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_uart.c
 6=../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_cortex.c
-7=../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_crc.c
-8=../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_exti.c
-9=../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_tim.c
-10=../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_tim_ex.c
+7=../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_exti.c
+8=../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_tim.c
+9=../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_hal_tim_ex.c
 [FileName]
 0=py32l020_hal.c
 1=py32l020_hal_rcc.c
@@ -18,10 +17,9 @@
 4=py32l020_hal_pwr.c
 5=py32l020_hal_uart.c
 6=py32l020_hal_cortex.c
-7=py32l020_hal_crc.c
-8=py32l020_hal_exti.c
-9=py32l020_hal_tim.c
-10=py32l020_hal_tim_ex.c
+7=py32l020_hal_exti.c
+8=py32l020_hal_tim.c
+9=py32l020_hal_tim_ex.c
 [Define]
 0=USE_HAL_DRIVER
 1=PY32L020x5

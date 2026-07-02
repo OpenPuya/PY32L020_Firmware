@@ -95,6 +95,7 @@ typedef struct
                                    @ref FLASH_OB_USER_BOR_ENABLE,
                                    @ref FLASH_OB_USER_BOR_LEVEL,
                                    @ref FLASH_OB_USER_IWDG_SW,
+                                   @ref FLASH_OB_USER_IWDG_STOP,
                                    @ref FLASH_OB_USER_SWD_NRST */
 } FLASH_OBProgramInitTypeDef;
 
@@ -147,13 +148,21 @@ typedef struct
 /** @defgroup FLASH_Type_Erase FLASH erase type
   * @{
   */
-#define FLASH_TYPEERASE_MASSERASE       (0x01U)  /*!<Flash mass erase activation*/
-#define FLASH_TYPEERASE_PAGEERASE       (0x02U)  /*!<Flash Pages erase activation*/
-#define FLASH_TYPEERASE_SECTORERASE     (0x03U)
+#define FLASH_TYPEERASE_MASSERASE       FLASH_CR_MER  /*!<Flash mass erase activation*/
+#define FLASH_TYPEERASE_PAGEERASE       FLASH_CR_PER  /*!<Flash Pages erase activation*/
+#define FLASH_TYPEERASE_SECTORERASE     FLASH_CR_SER  /*!<Flash sectore erase activation*/
 /**
   * @}
   */
 
+/** @defgroup FLASH_Type_Program FLASH type program
+  * @{
+  */
+#define FLASH_TYPEPROGRAM_PAGE          FLASH_CR_PG  /*!<Program 128bytes at a specified address.*/
+/**
+  * @}
+  */
+  
 /** @defgroup FLASH_Flags FLASH Flags Definition
   * @{
   */
@@ -231,20 +240,19 @@ typedef struct
 #define OB_USER_BOR_LEV         FLASH_OPTR_BOR_LEV
 #define OB_USER_IWDG_SW         FLASH_OPTR_IWDG_SW
 #define OB_USER_SWD_NRST_MODE   (FLASH_OPTR_SWD_MODE | FLASH_OPTR_NRST_MODE)
+
+#if defined(FLASH_OPTR_IWDG_STOP)
+#define OB_USER_IWDG_STOP       FLASH_OPTR_IWDG_STOP
+#define OB_USER_ALL             (OB_USER_BOR_EN  | OB_USER_BOR_LEV   | OB_USER_IWDG_SW | \
+                                 OB_USER_SWD_NRST_MODE | OB_USER_IWDG_STOP)
+#else
 #define OB_USER_ALL             (OB_USER_BOR_EN  | OB_USER_BOR_LEV   | OB_USER_IWDG_SW | \
                                  OB_USER_SWD_NRST_MODE)
+#endif
 /**
   * @}
   */
 
-/** @defgroup FLASH_Type_Program FLASH type program
-  * @{
-  */
-#define FLASH_TYPEPROGRAM_PAGE       (0x01U)  /*!<Program 128bytes at a specified address.*/
-/**
-  * @}
-  */
-  
 /** @defgroup FLASH_OB_USER_BOR_ENABLE FLASH Option Bytes BOR Enable
   * @{
   */
@@ -287,6 +295,17 @@ typedef struct
 #define OB_IWDG_SW                     FLASH_OPTR_IWDG_SW  /*!< Software IWDG selected */
 #define OB_IWDG_HW                     0x00000000U         /*!< Hardware IWDG selected */
 
+/**
+  * @}
+  */
+  
+/** @defgroup FLASH_OB_USER_IWDG_STOP FLASH IWDG Counter Freeze in STOP
+  * @{
+  */
+#if defined(FLASH_OPTR_IWDG_STOP)
+#define OB_IWDG_STOP_FREEZE            0x00000000U  /*!< Freeze IWDG counter in STOP mode */
+#define OB_IWDG_STOP_ACTIVE            ((uint32_t)FLASH_OPTR_IWDG_STOP) /*!< IWDG counter active in STOP mode */
+#endif
 /**
   * @}
   */
@@ -426,10 +445,10 @@ typedef struct
 
 #define __HAL_FLASH_TIME_REG_SET(__EPPARA0__,__EPPARA1__,__EPPARA2__,__EPPARA3__,__EPPARA4__)           \
                                                         do {                                            \
-                                                            FLASH->TS0  = (__EPPARA0__)&0x1FF;           \
+                                                            FLASH->TS0  = (__EPPARA0__)&0x1FF;          \
                                                             FLASH->TS1  = ((__EPPARA0__)>>18)&0x3FF;    \
-                                                            FLASH->TS3  = ((__EPPARA0__)>>9)&0x1FF;      \
-                                                            FLASH->TS2P = (__EPPARA1__)&0x1FF;           \
+                                                            FLASH->TS3  = ((__EPPARA0__)>>9)&0x1FF;     \
+                                                            FLASH->TS2P = (__EPPARA1__)&0x1FF;          \
                                                             FLASH->TPS3 = ((__EPPARA1__)>>16)&0xFFF;    \
                                                             FLASH->PERTPE = (__EPPARA2__)&0x3FFFF;      \
                                                             FLASH->SMERTPE = (__EPPARA3__)&0x3FFFF;     \
@@ -437,10 +456,10 @@ typedef struct
                                                             FLASH->PRETPE = ((__EPPARA4__)>>16)&0x3FFF; \
                                                          } while(0U)
 
-#define __HAL_FLASH_IS_INVALID_TIMMING_SEQUENCE(_INDEX_)  (((FLASH->TS0)     !=  ((*(uint32_t *)(_FlashTimmingParam[_INDEX_]))&0x1FF))          ||  \
+#define __HAL_FLASH_IS_INVALID_TIMMING_SEQUENCE(_INDEX_)  (((FLASH->TS0)     !=  ((*(uint32_t *)(_FlashTimmingParam[_INDEX_]))&0x1FF))         ||  \
                                                            ((FLASH->TS1)     != (((*(uint32_t *)(_FlashTimmingParam[_INDEX_]))>>18)&0x3FF))    ||  \
-                                                           ((FLASH->TS3)     != (((*(uint32_t *)(_FlashTimmingParam[_INDEX_]))>>9)&0x1FF))      ||  \
-                                                           ((FLASH->TS2P)    !=  ((*(uint32_t *)(_FlashTimmingParam[_INDEX_]+4))&0x1FF))        ||  \
+                                                           ((FLASH->TS3)     != (((*(uint32_t *)(_FlashTimmingParam[_INDEX_]))>>9)&0x1FF))     ||  \
+                                                           ((FLASH->TS2P)    !=  ((*(uint32_t *)(_FlashTimmingParam[_INDEX_]+4))&0x1FF))       ||  \
                                                            ((FLASH->TPS3)    != (((*(uint32_t *)(_FlashTimmingParam[_INDEX_]+4))>>16)&0xFFF))  ||  \
                                                            ((FLASH->PERTPE)  !=  ((*(uint32_t *)(_FlashTimmingParam[_INDEX_]+8))&0x3FFFF))     ||  \
                                                            ((FLASH->SMERTPE) !=  ((*(uint32_t *)(_FlashTimmingParam[_INDEX_]+12))&0x3FFFF))    ||  \
@@ -570,9 +589,9 @@ HAL_StatusTypeDef  FLASH_WaitForLastOperation(uint32_t Timeout);
 
 #define IS_FLASH_PROGRAM_ADDRESS(__ADDRESS__)          (IS_FLASH_PROGRAM_MAIN_MEM_ADDRESS(__ADDRESS__))
 
-#define IS_FLASH_NB_PAGES(__ADDRESS__, __VALUE__)      (((__ADDRESS__) >= (FLASH_BASE)) && ((__ADDRESS__ + (__VALUE__*FLASH_PAGE_SIZE)) <= (FLASH_BASE + FLASH_SIZE - 1UL)))
+#define IS_FLASH_NB_PAGES(__ADDRESS__, __VALUE__)      (((__ADDRESS__) >= (FLASH_BASE)) && ((__ADDRESS__ + (__VALUE__*FLASH_PAGE_SIZE) - 1) <= (FLASH_BASE + FLASH_SIZE - 1UL)))
 
-#define IS_FLASH_NB_SECTORS(__ADDRESS__, __VALUE__)    (((__ADDRESS__) >= (FLASH_BASE)) && ((__ADDRESS__ + (__VALUE__*FLASH_SECTOR_SIZE)) <= (FLASH_BASE + FLASH_SIZE - 1UL)))
+#define IS_FLASH_NB_SECTORS(__ADDRESS__, __VALUE__)    (((__ADDRESS__) >= (FLASH_BASE)) && ((__ADDRESS__ + (__VALUE__*FLASH_SECTOR_SIZE) - 1) <= (FLASH_BASE + FLASH_SIZE - 1UL)))
 
 #define IS_FLASH_FAST_PROGRAM_ADDRESS(__ADDRESS__)     (((__ADDRESS__) >= (FLASH_BASE)) && ((__ADDRESS__) <= (FLASH_BASE + FLASH_SIZE - 256UL)))
 
@@ -641,4 +660,4 @@ HAL_StatusTypeDef  FLASH_WaitForLastOperation(uint32_t Timeout);
 
 #endif /* __PY32L020_HAL_FLASH_H */
 
-/************************ (C) COPYRIGHT Puya *****END OF FILE****/
+/************************ (C) COPYRIGHT Puya *****END OF FILE******************/

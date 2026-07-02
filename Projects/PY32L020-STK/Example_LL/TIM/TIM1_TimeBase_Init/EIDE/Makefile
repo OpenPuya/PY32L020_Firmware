@@ -29,19 +29,17 @@ OPT = -Og
 # paths
 #######################################
 # Build path
-BUILD_DIR = build\Project
+BUILD_DIR = Project
 
 ######################################
 # source
 ######################################
 # C sources
-C_SOURCES =  \
-../Src/main.c \
+C_SOURCES =  \../Src/main.c \
 ../Src/py32l020_it.c \
 ../Src/system_py32l020.c \
 ../../../../../../Drivers/BSP/PY32L020xx_Start_Kit/py32l020xx_ll_Start_Kit.c \
 ../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_ll_utils.c \
-../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_ll_rcc.c \
 ../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_ll_tim.c \
 ../../../../../../Drivers/PY32L020_HAL_Driver/Src/py32l020_ll_gpio.c
 

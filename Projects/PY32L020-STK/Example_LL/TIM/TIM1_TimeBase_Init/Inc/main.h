@@ -45,18 +45,9 @@ extern "C" {
 #include "py32l020_ll_utils.h"
 #include "py32l020_ll_pwr.h"
 #include "py32l020_ll_gpio.h"
-
 #include "py32l020_ll_adc.h"
-#include "py32l020_ll_comp.h"
-//#include "py32l020_ll_usart.h"
-//#include "py32l020_ll_spi.h"
-//#include "py32l020_ll_i2c.h"
-
 #include "py32l020_ll_iwdg.h"
-#include "py32l020_ll_crc.h"
 #include "py32l020_ll_tim.h"
-
-//#include "py32l020_ll_lptim.h"
 
 #if defined(USE_FULL_ASSERT)
 #include "py32_assert.h"

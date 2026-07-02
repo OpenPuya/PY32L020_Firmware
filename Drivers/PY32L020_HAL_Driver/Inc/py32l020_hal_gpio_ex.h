@@ -151,4 +151,4 @@ extern "C" {
 
 #endif /* __PY32L020_HAL_GPIO_EX_H */
 
-/************************ (C) COPYRIGHT Puya *****END OF FILE****/
+/************************ (C) COPYRIGHT Puya *****END OF FILE******************/
